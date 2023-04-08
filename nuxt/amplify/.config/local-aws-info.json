@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/Users/fujitaiori/.amplify/awscloudformation/Hw2koLfkgf"
+  }
+}
