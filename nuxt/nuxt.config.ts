@@ -16,7 +16,13 @@ export default defineNuxtConfig({
     },
     define: {
       'process.env.DEBUG': false,
+      'window.global': {},
     },
   },
   css: ['@/assets/main.scss'],
+  // plugins: [
+  //   { src: '~/plugins/amplify'},
+  //   { src: '~/plugins/client', mode: 'client' }
+  // ],
+  plugins: ["~/plugins/amplify"],
 })
