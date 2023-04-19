@@ -20,9 +20,5 @@ export default defineNuxtConfig({
     },
   },
   css: ['@/assets/main.scss'],
-  // plugins: [
-  //   { src: '~/plugins/amplify'},
-  //   { src: '~/plugins/client', mode: 'client' }
-  // ],
-  plugins: ["~/plugins/amplify"],
+  plugins: [{ src: '~/plugins/amplify' }],
 })
