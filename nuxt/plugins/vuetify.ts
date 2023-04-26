@@ -1,6 +1,12 @@
 import { createVuetify } from 'vuetify'
-import { MAIN_THEME, mainTheme, MAIN_DARK_THEME, mainDarkTheme } from '@/helpers/themes'
+import {
+  MAIN_THEME,
+  mainTheme,
+  MAIN_DARK_THEME,
+  mainDarkTheme,
+} from '@/helpers/themes'
 import { defaults } from '@/helpers/defaults'
+import * as labs from 'vuetify/labs/components'
 // import '@mdi/font/css/materialdesignicons.css' // 使用するアイコンを読み込む `mdi-xxx`
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -23,6 +29,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         lighten: 9,
         darken: 9,
       },
+    },
+    components: {
+      ...labs,
     },
   })
 
