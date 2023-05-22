@@ -18,6 +18,7 @@
         {{ user.id }} : {{ user.name }}
       </li>
     </ul>
+    <child-component />
   </div>
 </template>
 
@@ -26,8 +27,12 @@ import { API } from 'aws-amplify'
 import { createUser } from '~/src/graphql/mutations'
 import { listUsers } from '~/src/graphql/queries'
 import { onCreateUser } from '~/src/graphql/subscriptions'
+import ChildComponent from '~/components/ChildComponent'
 
 export default defineNuxtComponent({
+  components: {
+    ChildComponent,
+  },
   data() {
     return {
       name: '',
