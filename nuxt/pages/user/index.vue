@@ -47,6 +47,9 @@ export default defineNuxtComponent({
       asyncUsers: users.data.listUsers.items,
     }
   },
+  async beforeCreate() {
+    console.log('beforeCreate: インスタンス生成前')
+  },
   async created() {
     console.log('created: インスタンス生成後 DOMマウント前')
     console.log('マウントしているDOM要素:', this.$el)
