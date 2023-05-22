@@ -3,8 +3,18 @@
     <h1>User</h1>
     <v-text-field v-model="name" label="Name"></v-text-field>
     <v-btn @click="create">Create</v-btn>
+
+    <h2>users</h2>
     <ul>
       <li v-for="user in users" :key="user.id">
+        {{ user.id }} : {{ user.name }}
+      </li>
+    </ul>
+
+    <p>{{ title }}</p>
+    <h2>asyncUsers</h2>
+    <ul>
+      <li v-for="user in asyncUsers" :key="user.id">
         {{ user.id }} : {{ user.name }}
       </li>
     </ul>
@@ -17,16 +27,32 @@ import { createUser } from '~/src/graphql/mutations'
 import { listUsers } from '~/src/graphql/queries'
 import { onCreateUser } from '~/src/graphql/subscriptions'
 
-export default {
+export default defineNuxtComponent({
   data() {
     return {
       name: '',
       users: [],
     }
   },
-  created() {
-    this.getUsers()
+  async asyncData() {
+    console.log('asyncData: インスタンス生成前')
+    const users = await API.graphql({
+      query: listUsers,
+    })
+    return {
+      title: 'title',
+      asyncUsers: users.data.listUsers.items,
+    }
+  },
+  async created() {
+    console.log('created: インスタンス生成後 DOMマウント前')
+    console.log('マウントしているDOM要素:', this.$el)
+    await this.getUsers()
     this.subscribe()
+  },
+  mounted() {
+    console.log('mounted: DOM生成直後に実行')
+    console.log('マウントしているDOM要素:', this.$el)
   },
   methods: {
     async create() {
@@ -59,5 +85,5 @@ export default {
       })
     },
   },
-}
+})
 </script>
