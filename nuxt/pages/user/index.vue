@@ -11,7 +11,6 @@
       </li>
     </ul>
 
-    <p>{{ title }}</p>
     <h2>asyncUsers</h2>
     <ul>
       <li v-for="user in asyncUsers" :key="user.id">
@@ -45,7 +44,6 @@ export default defineNuxtComponent({
       query: listUsers,
     })
     return {
-      title: 'title',
       asyncUsers: users.data.listUsers.items,
     }
   },
