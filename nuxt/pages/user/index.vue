@@ -56,17 +56,16 @@ export default defineNuxtComponent({
     await this.getUsers()
     this.subscribe()
   },
+  beforeMount() {
+    console.log('マウント直前 DOMはまだ作成されていない')
+  },
   mounted() {
     console.log('mounted: DOM生成直後に実行')
     console.log('マウントしているDOM要素:', this.$el)
   },
   methods: {
     async create() {
-      const { name } = this
-      if (!name) {
-        return false
-      }
-      const user = { name }
+      const user = { name: this.name }
       await API.graphql({
         query: createUser,
         variables: { input: user },
