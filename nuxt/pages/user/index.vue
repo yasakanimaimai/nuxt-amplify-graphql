@@ -50,11 +50,11 @@ export default defineNuxtComponent({
   },
   async beforeCreate() {
     console.log('beforeCreate: インスタンス生成前')
-    // インスタンスが生成されていないので hoge is not defined
-    // console.log({ hoge })
+    console.log('hoge: ' + this.hoge)
   },
   async created() {
     console.log('created: インスタンス生成後 DOMマウント前')
+    console.log('hoge: ' + this.hoge)
     console.log('マウントしているDOM要素:', this.$el)
     await this.getUsers()
     this.subscribe()
