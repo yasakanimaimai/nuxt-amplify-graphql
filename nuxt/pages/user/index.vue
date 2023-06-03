@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>現在のhoge: {{ hoge }}</h1>
     <h1>User</h1>
     <v-text-field v-model="name" label="Name"></v-text-field>
     <v-btn @click="create">Create</v-btn>
@@ -40,7 +41,9 @@ export default defineNuxtComponent({
     }
   },
   async asyncData() {
-    console.log('asyncData: インスタンス生成前')
+    console.log(
+      'asyncData: インスタンス生成前 CSRの場合はコンソールに表示される'
+    )
     const users = await API.graphql({
       query: listUsers,
     })
@@ -49,21 +52,22 @@ export default defineNuxtComponent({
     }
   },
   async beforeCreate() {
-    console.log('beforeCreate: インスタンス生成前')
+    console.log('#### beforeCreate: インスタンス生成前')
     console.log('hoge: ' + this.hoge)
   },
   async created() {
-    console.log('created: インスタンス生成後 DOMマウント前')
+    console.log('#### created: インスタンス生成後 仮想DOMマウント前')
     console.log('hoge: ' + this.hoge)
     console.log('マウントしているDOM要素:', this.$el)
     await this.getUsers()
     this.subscribe()
   },
   beforeMount() {
-    console.log('マウント直前 DOMはまだ作成されていない')
+    console.log('#### beforeMount: マウント直前')
+    console.log('マウントしているDOM要素:', this.$el)
   },
   mounted() {
-    console.log('mounted: DOM生成直後に実行')
+    console.log('#### mounted: DOM生成直後に実行')
     console.log('マウントしているDOM要素:', this.$el)
   },
   methods: {
