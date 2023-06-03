@@ -6,7 +6,7 @@
     <v-btn @click="create">Create</v-btn>
 
     <h2>users</h2>
-    <ul ref="userList">
+    <ul>
       <li v-for="user in users" :key="user.id">
         {{ user.id }} : {{ user.name }}
       </li>
@@ -40,17 +40,17 @@ export default defineNuxtComponent({
       users: [],
     }
   },
-  // async asyncData() {
-  //   console.log(
-  //     'asyncData: インスタンス生成前 CSRの場合はコンソールに表示される'
-  //   )
-  //   const users = await API.graphql({
-  //     query: listUsers,
-  //   })
-  //   return {
-  //     asyncUsers: users.data.listUsers.items,
-  //   }
-  // },
+  async asyncData() {
+    console.log(
+      'asyncData: インスタンス生成前 CSRの場合はコンソールに表示される'
+    )
+    const users = await API.graphql({
+      query: listUsers,
+    })
+    return {
+      asyncUsers: users.data.listUsers.items,
+    }
+  },
   async beforeCreate() {
     console.log('#### beforeCreate: インスタンス生成前')
     console.log('hoge: ' + this.hoge)
@@ -60,6 +60,7 @@ export default defineNuxtComponent({
     console.log('hoge: ' + this.hoge)
     console.log('マウントしているDOM要素:', this.$el)
     await this.getUsers()
+    this.subscribe()
   },
   beforeMount() {
     console.log('#### beforeMount: マウント直前')
@@ -69,10 +70,10 @@ export default defineNuxtComponent({
     console.log('#### mounted: DOM生成直後に実行')
     console.log('マウントしているDOM要素:', this.$el)
   },
-  beforeUpdate() {
-    console.log('#### beforeUpdate: DOMのrerender前に実行')
-    console.log(`更新前のuserList:`, this.$refs.userList)
-  },
+  // beforeUpdate() {
+  //   console.log('#### beforeUpdate: DOMのrerender前に実行')
+  //   console.log(`users:`, this.users)
+  // },
   methods: {
     async create() {
       const user = { name: this.name }
