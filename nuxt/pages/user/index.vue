@@ -70,10 +70,21 @@ export default defineNuxtComponent({
     console.log('#### mounted: DOM生成直後に実行')
     console.log('マウントしているDOM要素:', this.$el)
   },
-  // beforeUpdate() {
-  //   console.log('#### beforeUpdate: DOMのrerender前に実行')
-  //   console.log(`users:`, this.users)
-  // },
+  beforeUpdate() {
+    console.log('#### beforeUpdate: DOMのrerender前に実行')
+  },
+  updated() {
+    console.log('#### updated: DOMのrerender後に実行')
+  },
+  beforeDestroy() {
+    console.log('#### beforeDestroy: DOMのインスタンスが破棄される前に実行')
+  },
+  destroyed() {
+    console.log('#### destroyed: DOMのインスタンスが破棄された後に実行')
+  },
+  errorCaptured() {
+    console.log('#### errorCaptured: 子コンポーネントでエラーが発生したら実行')
+  },
   methods: {
     async create() {
       const user = { name: this.name }
