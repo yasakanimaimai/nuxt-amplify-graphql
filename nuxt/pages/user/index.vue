@@ -12,12 +12,12 @@
       </li>
     </ul>
 
-    <!-- <h2>asyncUsers</h2>
+    <h2>asyncUsers</h2>
     <ul>
       <li v-for="user in asyncUsers" :key="user.id">
         {{ user.id }} : {{ user.name }}
       </li>
-    </ul> -->
+    </ul>
     <child-component />
   </div>
 </template>
